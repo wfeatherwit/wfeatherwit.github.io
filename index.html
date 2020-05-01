@@ -156,6 +156,124 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python小记——函数的特殊用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/01/Python%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/">Python小记——函数的特殊用法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/01/Python%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2020-05-01T11:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="函数可以分配给变量"><a href="#函数可以分配给变量" class="headerlink" title="函数可以分配给变量"></a>函数可以分配给变量</h1><p>在python中，除了字符串、列表、字典和模块等之外，函数也可作为python的对象。</p>
+<p>先定义一个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def tA(text):</span><br><span class="line">...     return text.upper() + &#39;!&#39;</span><br><span class="line">&gt;&gt;&gt; tA(&#39;hello&#39;)</span><br><span class="line">&#39;HELLO!&#39;</span><br></pre></td></tr></table></figure>
+
+<p>把tA函数分配给一个变量tB</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tB &#x3D; tA</span><br><span class="line">&gt;&gt;&gt; tB(&#39;world&#39;)</span><br><span class="line">&#39;WORLD!&#39;</span><br></pre></td></tr></table></figure>
+
+<p>无需调用函数，直接获取tA引用的函数对象，再创建一个指向该函数对象的名称tB。由于名称tB指向的是底层函数，所以名称tA和tB二者和函数本身实质上是相互独立的，因此即使删除原函数名称tA，也不会使tB无效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; del tA</span><br><span class="line">&gt;&gt;&gt; tA(&#39;hello&#39;)</span><br><span class="line">NameError: name &#39;tA&#39; is not defined</span><br><span class="line">&gt;&gt;&gt; tB(&#39;hello&#39;)</span><br><span class="line">&#39;HELLO!&#39;</span><br></pre></td></tr></table></figure>
+
+<p>Python在创建函数时为每个函数附带了一个用于调试的字符串标识符，使用<strong>name</strong>属性可以访问这个内部的标识符（Python3.3以上版本可以使用<strong>qualname</strong>属性访问标识符）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tB.__name__</span><br><span class="line">&#39;tA&#39;</span><br><span class="line">&gt;&gt;&gt; tB.__qualname__</span><br><span class="line">&#39;tA&#39;</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数可存储在数据结构中"><a href="#函数可存储在数据结构中" class="headerlink" title="函数可存储在数据结构中"></a>函数可存储在数据结构中</h1><p>可以将函数添加到列表中（<strong>内置函数和自定义函数都可以</strong>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; functions &#x3D; [tB, str.lower, str.capitalize]</span><br><span class="line">&gt;&gt;&gt; functions</span><br><span class="line">[&lt;function tA at 0x00000290309B9940&gt;,   </span><br><span class="line">&lt;method &#39;lower&#39; of &#39;str&#39; objects&gt;,   </span><br><span class="line">&lt;method &#39;capitalize&#39; of &#39;str&#39; objects&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>访问和调用存储在列表中的函数对象与访问调用其他类型的对象没有区别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for i in functions:</span><br><span class="line">...     print(i, i(&#39;hello&#39;))</span><br><span class="line">&lt;function tA at 0x00000290309B9940&gt; HELLO!</span><br><span class="line">&lt;method &#39;lower&#39; of &#39;str&#39; objects&gt; hello</span><br><span class="line">&lt;method &#39;capitalize&#39; of &#39;str&#39; objects&gt; Hello</span><br><span class="line">&gt;&gt;&gt; functions[0](&#39;hello&#39;)</span><br><span class="line">&#39;HELLO!&#39;</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数可以传递给其他函数"><a href="#函数可以传递给其他函数" class="headerlink" title="函数可以传递给其他函数"></a>函数可以传递给其他函数</h1><p>由于函数是对象，因此可以将其作为参数传递给其他函数，而且传递不同的函数会产生不同的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def greet(function):</span><br><span class="line">...     greeting &#x3D; function(&#39;today is fine day&#39;)</span><br><span class="line">...     print(greeting)</span><br><span class="line">&gt;&gt;&gt; greet(tB)</span><br><span class="line">TODAY IS FINE DAY!</span><br><span class="line">&gt;&gt;&gt; greet(str.capitalize)</span><br><span class="line">Today is fine day</span><br></pre></td></tr></table></figure>
+
+<p>能接受其他函数作为参数的函数被称为<strong>高阶函数</strong>，在Python中的 <strong>map</strong> 函数就是一个极具代表性的高阶函数。<br><strong>map</strong> 接受一个函数对象和一个可迭代对象（例如列表、元组、字典、字符串），然后在可迭代对象中的每个元素上调用该函数对象来生成结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(map(tB, [&#39;python&#39;, &#39;java&#39;]))</span><br><span class="line">[&#39;PYTHON!&#39;, &#39;JAVA!&#39;]</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数可以嵌套"><a href="#函数可以嵌套" class="headerlink" title="函数可以嵌套"></a>函数可以嵌套</h1><p>Python可以允许函数中定义函数，这通常被称为嵌套函数或内部函数，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def speak(text):</span><br><span class="line">...     def whisper(t):</span><br><span class="line">...         return t.lower() + &#39;!&#39;</span><br><span class="line">...     return whisper(text)</span><br><span class="line">&gt;&gt;&gt; speak(&#39;I Like Python&#39;)</span><br><span class="line">&#39;i like python!&#39;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，每次调用speak时，都会定义一个新的内部函数whisper并立即调用。<br>可是，whisper存在于speak中，并不能调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; whisper(&#39;Python&#39;)</span><br><span class="line">NameError: name &#39;whisper&#39; is not defined</span><br></pre></td></tr></table></figure>
+<p>一个不能调用的函数要它何用？<br>但其实这也是一个Python函数<strong>特性</strong>的体现。前面提到过，函数可以分配给变量，从而实现调用函数的功能。因此，<em>可以给定义在函数内部的函数分配一个变量</em>。<br>还是上面的例子，只不过将变形一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def speak(value):</span><br><span class="line">...     def whisper(text):</span><br><span class="line">...         return text.lower() + &#39;...&#39;</span><br><span class="line">...     def yell(text):</span><br><span class="line">...         return text.upper() + &#39;!&#39;</span><br><span class="line">...     if value &#x3D;&#x3D; True:</span><br><span class="line">...         return whisper</span><br><span class="line">...     else:</span><br><span class="line">...         return yell</span><br><span class="line">&gt;&gt;&gt; speak_func1 &#x3D; speak(1)</span><br><span class="line">&gt;&gt;&gt; speak_func1(&#39;I Like Python&#39;)</span><br><span class="line">&#39;i like python...&#39;</span><br><span class="line">&gt;&gt;&gt; speak_func0 &#x3D; speak(0)</span><br><span class="line">&gt;&gt;&gt; speak_func0(&#39;I Like Python&#39;)</span><br><span class="line">&#39;I LIKW PYTHON!&#39;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">函数</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/01/Python%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-目标市场营销战略决策" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -243,124 +361,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/28/%E7%9B%AE%E6%A0%87%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E6%88%98%E7%95%A5%E5%86%B3%E7%AD%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python小记——函数的特殊用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/28/Python%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/">函数的特殊用法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/28/Python%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-04-28T12:04:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="函数可以分配给变量"><a href="#函数可以分配给变量" class="headerlink" title="函数可以分配给变量"></a>函数可以分配给变量</h1><p>在python中，除了字符串、列表、字典和模块等之外，函数也可作为python的对象。</p>
-<p>先定义一个函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def tA(text):</span><br><span class="line">...     return text.upper() + &#39;!&#39;</span><br><span class="line">&gt;&gt;&gt; tA(&#39;hello&#39;)</span><br><span class="line">&#39;HELLO!&#39;</span><br></pre></td></tr></table></figure>
-
-<p>把tA函数分配给一个变量tB</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tB &#x3D; tA</span><br><span class="line">&gt;&gt;&gt; tB(&#39;world&#39;)</span><br><span class="line">&#39;WORLD!&#39;</span><br></pre></td></tr></table></figure>
-
-<p>无需调用函数，直接获取tA引用的函数对象，再创建一个指向该函数对象的名称tB。由于名称tB指向的是底层函数，所以名称tA和tB二者和函数本身实质上是相互独立的，因此即使删除原函数名称tA，也不会使tB无效。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; del tA</span><br><span class="line">&gt;&gt;&gt; tA(&#39;hello&#39;)</span><br><span class="line">NameError: name &#39;tA&#39; is not defined</span><br><span class="line">&gt;&gt;&gt; tB(&#39;hello&#39;)</span><br><span class="line">&#39;HELLO!&#39;</span><br></pre></td></tr></table></figure>
-
-<p>Python在创建函数时为每个函数附带了一个用于调试的字符串标识符，使用<strong>name</strong>属性可以访问这个内部的标识符（Python3.3以上版本可以使用<strong>qualname</strong>属性访问标识符）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tB.__name__</span><br><span class="line">&#39;tA&#39;</span><br><span class="line">&gt;&gt;&gt; tB.__qualname__</span><br><span class="line">&#39;tA&#39;</span><br></pre></td></tr></table></figure>
-
-<h1 id="函数可存储在数据结构中"><a href="#函数可存储在数据结构中" class="headerlink" title="函数可存储在数据结构中"></a>函数可存储在数据结构中</h1><p>可以将函数添加到列表中（<strong>内置函数和自定义函数都可以</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; functions &#x3D; [tB, str.lower, str.capitalize]</span><br><span class="line">&gt;&gt;&gt; functions</span><br><span class="line">[&lt;function tA at 0x00000290309B9940&gt;,   </span><br><span class="line">&lt;method &#39;lower&#39; of &#39;str&#39; objects&gt;,   </span><br><span class="line">&lt;method &#39;capitalize&#39; of &#39;str&#39; objects&gt;]</span><br></pre></td></tr></table></figure>
-
-<p>访问和调用存储在列表中的函数对象与访问调用其他类型的对象没有区别</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; for i in functions:</span><br><span class="line">...     print(i, i(&#39;hello&#39;))</span><br><span class="line">&lt;function tA at 0x00000290309B9940&gt; HELLO!</span><br><span class="line">&lt;method &#39;lower&#39; of &#39;str&#39; objects&gt; hello</span><br><span class="line">&lt;method &#39;capitalize&#39; of &#39;str&#39; objects&gt; Hello</span><br><span class="line">&gt;&gt;&gt; functions[0](&#39;hello&#39;)</span><br><span class="line">&#39;HELLO!&#39;</span><br></pre></td></tr></table></figure>
-
-<h1 id="函数可以传递给其他函数"><a href="#函数可以传递给其他函数" class="headerlink" title="函数可以传递给其他函数"></a>函数可以传递给其他函数</h1><p>由于函数是对象，因此可以将其作为参数传递给其他函数，而且传递不同的函数会产生不同的结果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def greet(function):</span><br><span class="line">...     greeting &#x3D; function(&#39;today is fine day&#39;)</span><br><span class="line">...     print(greeting)</span><br><span class="line">&gt;&gt;&gt; greet(tB)</span><br><span class="line">TODAY IS FINE DAY!</span><br><span class="line">&gt;&gt;&gt; greet(str.capitalize)</span><br><span class="line">Today is fine day</span><br></pre></td></tr></table></figure>
-
-<p>能接受其他函数作为参数的函数被称为<strong>高阶函数</strong>，在Python中的 <strong>map</strong> 函数就是一个极具代表性的高阶函数。<br><strong>map</strong> 接受一个函数对象和一个可迭代对象（例如列表、元组、字典、字符串），然后在可迭代对象中的每个元素上调用该函数对象来生成结果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list(map(tB, [&#39;python&#39;, &#39;java&#39;]))</span><br><span class="line">[&#39;PYTHON!&#39;, &#39;JAVA!&#39;]</span><br></pre></td></tr></table></figure>
-
-<h1 id="函数可以嵌套"><a href="#函数可以嵌套" class="headerlink" title="函数可以嵌套"></a>函数可以嵌套</h1><p>Python可以允许函数中定义函数，这通常被称为嵌套函数或内部函数，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def speak(text):</span><br><span class="line">...     def whisper(t):</span><br><span class="line">...         return t.lower() + &#39;!&#39;</span><br><span class="line">...     return whisper(text)</span><br><span class="line">&gt;&gt;&gt; speak(&#39;I Like Python&#39;)</span><br><span class="line">&#39;i like python!&#39;</span><br></pre></td></tr></table></figure>
-<p>在上面的代码中，每次调用speak时，都会定义一个新的内部函数whisper并立即调用。<br>可是，whisper存在于speak中，并不能调用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; whisper(&#39;Python&#39;)</span><br><span class="line">NameError: name &#39;whisper&#39; is not defined</span><br></pre></td></tr></table></figure>
-<p>一个不能调用的函数要它何用？<br>但其实这也是一个Python函数<strong>特性</strong>的体现。前面提到过，函数可以分配给变量，从而实现调用函数的功能。因此，<em>可以给定义在函数内部的函数分配一个变量</em>。<br>还是上面的例子，只不过将变形一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def speak(value):</span><br><span class="line">...     def whisper(text):</span><br><span class="line">...         return text.lower() + &#39;...&#39;</span><br><span class="line">...     def yell(text):</span><br><span class="line">...         return text.upper() + &#39;!&#39;</span><br><span class="line">...     if value &#x3D;&#x3D; True:</span><br><span class="line">...         return whisper</span><br><span class="line">...     else:</span><br><span class="line">...         return yell</span><br><span class="line">&gt;&gt;&gt; speak_func1 &#x3D; speak(1)</span><br><span class="line">&gt;&gt;&gt; speak_func1(&#39;I Like Python&#39;)</span><br><span class="line">&#39;i like python...&#39;</span><br><span class="line">&gt;&gt;&gt; speak_func0 &#x3D; speak(0)</span><br><span class="line">&gt;&gt;&gt; speak_func0(&#39;I Like Python&#39;)</span><br><span class="line">&#39;I LIKW PYTHON!&#39;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">函数</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/28/Python%E5%B0%8F%E8%AE%B0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/">展开全文 >></a>
         </p>
       
 
