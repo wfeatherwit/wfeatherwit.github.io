@@ -156,6 +156,277 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Python网络爬虫Urllib库基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/13/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%ABUrllib%E5%BA%93%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Python网络爬虫Urllib库基本使用</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/13/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%ABUrllib%E5%BA%93%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-10-13T00:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="cnblogs_post_body" class="blogpost-body">
+    <p>&nbsp;官方文档地址：<a href="https://docs.python.org/3/library/urllib.html" target="_blank" rel="noopener">https://docs.python.org/3/library/urllib.html</a></p>
+<h2 id="toc_1">什么是Urllib</h2>
+<p>Urllib是python内置的HTTP请求库<br>包括以下模块<br>urllib.request 请求模块<br>urllib.error 异常处理模块<br>urllib.parse url解析模块<br>urllib.robotparser robots.txt解析模块</p>
+<h3 id="toc_2">urlopen</h3>
+<p>关于urllib.request.urlopen参数的介绍：<br>urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False, context=None)</p>
+<p><strong>url参数的使用</strong></p>
+<p>先写一个简单的例子：</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+
+<p>response </span>= urllib.request.urlopen(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read().decode(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf-8</span><span style="color: rgba(128, 0, 0, 1)">‘</span>))</pre></p>
+</div>
+<p>urlopen一般常用的有三个参数，它的参数如下：<br>urllib.requeset.urlopen(url,data,timeout)<br>response.read()可以获取到网页的内容，如果没有read()，将返回如下内容</p>
+<p><strong>data参数的使用</strong></p>
+<p>上述的例子是通过请求百度的get请求获得百度，下面使用urllib的post请求<br>这里通过<a href="http://httpbin.org/post%E7%BD%91%E7%AB%99%E6%BC%94%E7%A4%BA%EF%BC%88%E8%AF%A5%E7%BD%91%E7%AB%99%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BA%E7%BB%83%E4%B9%A0%E4%BD%BF%E7%94%A8urllib%E7%9A%84%E4%B8%80%E4%B8%AA%E7%AB%99%E7%82%B9%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%8F%AF%E4%BB%A5" target="_blank" rel="noopener">http://httpbin.org/post网站演示（该网站可以作为练习使用urllib的一个站点使用，可以</a><br>模拟各种请求操作）。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div><pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.parse
+</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+
+<p>data </span>= bytes(urllib.parse.urlencode({<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">word</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">hello</span><span style="color: rgba(128, 0, 0, 1)">‘</span>}), encoding=<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf8</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span><span style="color: rgba(0, 0, 0, 1)">(data)<br>response </span>= urllib.request.urlopen(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://httpbin.org/post" target="_blank" rel="noopener">http://httpbin.org/post</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, data=<span style="color: rgba(0, 0, 0, 1)">data)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read())</pre><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div></p>
+<p>这里就用到urllib.parse，通过bytes(urllib.parse.urlencode())可以将post数据进行转换放到urllib.request.urlopen的data参数中。这样就完成了一次post请求。<br>所以如果我们添加data参数的时候就是以post请求方式请求，如果没有data参数就是get请求方式</p>
+<p><strong>timeout参数的使用</strong><br>在某些网络情况不好或者服务器端异常的情况会出现请求慢的情况，或者请求异常，所以这个时候我们需要给<br>请求设置一个超时时间，而不是让程序一直在等待结果。例子如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+
+<p>response </span>= urllib.request.urlopen(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, timeout=1<span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read())</pre></p>
+</div>
+<p>运行之后我们看到可以正常的返回结果，接着我们将timeout时间设置为0.1<br>运行程序会提示如下错误</p>
+<p><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170526232238544-1577809237.png" alt=""></p>
+<p>所以我们需要对异常进行抓取，代码更改为</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> socket
+</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.error
+
+<p></span><span style="color: rgba(0, 0, 255, 1)">try</span><span style="color: rgba(0, 0, 0, 1)">:<br>    response </span>= urllib.request.urlopen(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, timeout=0.1<span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">except</span><span style="color: rgba(0, 0, 0, 1)"> urllib.error.URLError as e:<br>    </span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> isinstance(e.reason, socket.timeout):<br>        </span><span style="color: rgba(0, 0, 255, 1)">print</span>(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">TIME OUT</span><span style="color: rgba(128, 0, 0, 1)">‘</span>)</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<h4 id="toc_3">响应</h4>
+<p><strong>响应类型、状态码、响应头</strong></p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+
+<p>response </span>= urllib.request.urlopen(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://www.python.org" target="_blank" rel="noopener">https://www.python.org</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(type(response))</pre></p>
+</div>
+<p>可以看到结果为：&lt;class 'http.client.httpresponse'=""&gt;<br>我们可以通过response.status、response.getheaders().response.getheader("server")，获取状态码以及头部信息<br>response.read()获得的是响应体的内容</p>
+<p>当然上述的urlopen只能用于一些简单的请求，因为它无法添加一些header信息，如果后面写爬虫我们可以知道，很多情况下我们是需要添加头部信息去访问目标站的，这个时候就用到了urllib.request</p>
+<h3 id="toc_4">request</h3>
+<p><strong>设置Headers</strong><br>有很多网站为了防止程序爬虫爬网站造成网站瘫痪，会需要携带一些headers头部信息才能访问，最长见的有user-agent参数</p>
+<p>写一个简单的例子：</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+
+<p>request </span>= urllib.request.Request(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://python.org" target="_blank" rel="noopener">https://python.org</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br>response </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.urlopen(request)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read().decode(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf-8</span><span style="color: rgba(128, 0, 0, 1)">‘</span>))</pre></p>
+</div>
+<p>给请求添加头部信息，从而定制自己请求网站是时的头部信息</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div><pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> request, parse
+
+<p>url </span>= <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://httpbin.org/post" target="_blank" rel="noopener">http://httpbin.org/post</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)"><br>headers </span>=<span style="color: rgba(0, 0, 0, 1)"> {<br>    </span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">User-Agent</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">,<br>    </span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">Host</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">httpbin.org</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)"><br>}<br>dict </span>=<span style="color: rgba(0, 0, 0, 1)"> {<br>    </span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">name</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">zhaofan</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)"><br>}<br>data </span>= bytes(parse.urlencode(dict), encoding=<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf8</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br>req </span>= request.Request(url=url, data=data, headers=headers, method=<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">POST</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br>response </span>=<span style="color: rgba(0, 0, 0, 1)"> request.urlopen(req)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read().decode(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf-8</span><span style="color: rgba(128, 0, 0, 1)">‘</span>))</pre><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div></p>
+<p>添加请求头的第二种方式</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> request, parse
+
+<p>url </span>= <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://httpbin.org/post" target="_blank" rel="noopener">http://httpbin.org/post</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)"><br>dict </span>=<span style="color: rgba(0, 0, 0, 1)"> {<br>    </span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">name</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">Germey</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)"><br>}<br>data </span>= bytes(parse.urlencode(dict), encoding=<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf8</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br>req </span>= request.Request(url=url, data=data, method=<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">POST</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br>req.add_header(</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">User-Agent</span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br>response </span>=<span style="color: rgba(0, 0, 0, 1)"> request.urlopen(req)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read().decode(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">utf-8</span><span style="color: rgba(128, 0, 0, 1)">‘</span>))</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>这种添加方式有个好处是自己可以定义一个请求头字典，然后循环进行添加</p>
+<p><strong>高级用法各种handler</strong></p>
+<p><strong>代理,ProxyHandler</strong></p>
+<p>通过rulllib.request.ProxyHandler()可以设置代理,网站它会检测某一段时间某个IP 的访问次数，如果访问次数过多，它会禁止你的访问,所以这个时候需要通过设置代理来爬取数据</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div><pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urllib.request
+
+<p>proxy_handler </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.ProxyHandler({<br>    </span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">http</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://127.0.0.1:9743" target="_blank" rel="noopener">http://127.0.0.1:9743</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">,<br>    </span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">https</span><span style="color: rgba(128, 0, 0, 1)">‘</span>: <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://127.0.0.1:9743" target="_blank" rel="noopener">https://127.0.0.1:9743</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)"><br>})<br>opener </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.build_opener(proxy_handler)<br>response </span>= opener.open(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read())</pre><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div></p>
+<p><strong>cookie,HTTPCookiProcessor</strong></p>
+<p>cookie中保存中我们常见的登录信息，有时候爬取网站需要携带cookie信息访问,这里用到了http.cookijar，用于获取cookie以及存储cookie</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> http.cookiejar, urllib.request
+cookie </span>=<span style="color: rgba(0, 0, 0, 1)"> http.cookiejar.CookieJar()
+handler </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.HTTPCookieProcessor(cookie)
+opener </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.build_opener(handler)
+response </span>= opener.open(<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">http://www.baidu.com</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 0, 255, 1)">for</span> item <span style="color: rgba(0, 0, 255, 1)">in</span><span style="color: rgba(0, 0, 0, 1)"> cookie:
+    </span><span style="color: rgba(0, 0, 255, 1)">print</span>(item.name+<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">=</span><span style="color: rgba(128, 0, 0, 1)">"</span>+item.value)</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>同时cookie可以写入到文件中保存，有两种方式http.cookiejar.MozillaCookieJar和http.cookiejar.LWPCookieJar()，当然你自己用哪种方式都可以</p>
+<p>具体代码例子如下：<br>http.cookiejar.MozillaCookieJar()方式</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> http.cookiejar, urllib.request
+filename </span>= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">cookie.txt</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+cookie </span>=<span style="color: rgba(0, 0, 0, 1)"> http.cookiejar.MozillaCookieJar(filename)
+handler </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.HTTPCookieProcessor(cookie)
+opener </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.build_opener(handler)
+response </span>= opener.open(<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">http://www.baidu.com</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+cookie.save(ignore_discard</span>=True, ignore_expires=True)</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>http.cookiejar.LWPCookieJar()方式</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> http.cookiejar, urllib.request
+filename </span>= <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">cookie.txt</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">
+cookie </span>=<span style="color: rgba(0, 0, 0, 1)"> http.cookiejar.LWPCookieJar(filename)
+handler </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.HTTPCookieProcessor(cookie)
+opener </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.build_opener(handler)
+response </span>= opener.open(<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">http://www.baidu.com</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+cookie.save(ignore_discard</span>=True, ignore_expires=True)</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>同样的如果想要通过获取文件中的cookie获取的话可以通过load方式，当然用哪种方式写入的，就用哪种方式读取。</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> http.cookiejar, urllib.request
+cookie </span>=<span style="color: rgba(0, 0, 0, 1)"> http.cookiejar.LWPCookieJar()
+cookie.load(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">cookie.txt</span><span style="color: rgba(128, 0, 0, 1)">'</span>, ignore_discard=True, ignore_expires=<span style="color: rgba(0, 0, 0, 1)">True)
+handler </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.HTTPCookieProcessor(cookie)
+opener </span>=<span style="color: rgba(0, 0, 0, 1)"> urllib.request.build_opener(handler)
+response </span>= opener.open(<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">http://www.baidu.com</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 0, 255, 1)">print</span>(response.read().decode(<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">utf-8</span><span style="color: rgba(128, 0, 0, 1)">'</span>))</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3 id="toc_5">异常处理</h3>
+<p>在很多时候我们通过程序访问页面的时候，有的页面可能会出现错误，类似404，500等错误<br>这个时候就需要我们捕捉异常，下面先写一个简单的例子</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> request,error
+
+<p></span><span style="color: rgba(0, 0, 255, 1)">try</span><span style="color: rgba(0, 0, 0, 1)">:<br>    response </span>= request.urlopen(<span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://pythonsite.com/1111.html" target="_blank" rel="noopener">http://pythonsite.com/1111.html</a></span><span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">except</span><span style="color: rgba(0, 0, 0, 1)"> error.URLError as e:<br>    </span><span style="color: rgba(0, 0, 255, 1)">print</span>(e.reason)</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>上述代码访问的是一个不存在的页面，通过捕捉异常，我们可以打印异常错误</p>
+<p>这里我们需要知道的是在urllb异常这里有两个个异常错误：<br>URLError,HTTPError，HTTPError是URLError的子类</p>
+<p>URLError里只有一个属性：reason,即抓异常的时候只能打印错误信息，类似上面的例子</p>
+<p>HTTPError里有三个属性：code,reason,headers，即抓异常的时候可以获得code,reson，headers三个信息，例子如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> request,error
+</span><span style="color: rgba(0, 0, 255, 1)">try</span><span style="color: rgba(0, 0, 0, 1)">:
+    response </span>= request.urlopen(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">http://pythonsite.com/1111.html</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 0, 255, 1)">except</span><span style="color: rgba(0, 0, 0, 1)"> error.HTTPError as e:
+    </span><span style="color: rgba(0, 0, 255, 1)">print</span><span style="color: rgba(0, 0, 0, 1)">(e.reason)
+    </span><span style="color: rgba(0, 0, 255, 1)">print</span><span style="color: rgba(0, 0, 0, 1)">(e.code)
+    </span><span style="color: rgba(0, 0, 255, 1)">print</span><span style="color: rgba(0, 0, 0, 1)">(e.headers)
+</span><span style="color: rgba(0, 0, 255, 1)">except</span><span style="color: rgba(0, 0, 0, 1)"> error.URLError as e:
+    </span><span style="color: rgba(0, 0, 255, 1)">print</span><span style="color: rgba(0, 0, 0, 1)">(e.reason)
+
+<p></span><span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)">:<br>    </span><span style="color: rgba(0, 0, 255, 1)">print</span>(<span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)">reqeust successfully</span><span style="color: rgba(128, 0, 0, 1)">“</span>)</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>同时，e.reason其实也可以在做深入的判断，例子如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> socket
+
+<p></span><span style="color: rgba(0, 0, 255, 1)">from</span> urllib <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> error,request</p>
+<p></span><span style="color: rgba(0, 0, 255, 1)">try</span><span style="color: rgba(0, 0, 0, 1)">:<br>    response </span>= request.urlopen(<span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.pythonsite.com/" target="_blank" rel="noopener">http://www.pythonsite.com/</a></span><span style="color: rgba(128, 0, 0, 1)">“</span>,timeout=0.001<span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">except</span><span style="color: rgba(0, 0, 0, 1)"> error.URLError as e:<br>    </span><span style="color: rgba(0, 0, 255, 1)">print</span><span style="color: rgba(0, 0, 0, 1)">(type(e.reason))<br>    </span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> isinstance(e.reason,socket.timeout):<br>        </span><span style="color: rgba(0, 0, 255, 1)">print</span>(<span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)">time out</span><span style="color: rgba(128, 0, 0, 1)">“</span>)</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3 id="toc_6">URL解析</h3>
+<p><strong>urlparse</strong><br>The URL parsing functions focus on splitting a URL string into its components, or on combining URL components into a URL string.</p>
+<p>urllib.parse.urlparse(urlstring, scheme='', allow_fragments=True)</p>
+<p>功能一：</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib.parse <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urlparse
+
+<p>result </span>= urlparse(<span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com/index.html;user?id=5#comment" target="_blank" rel="noopener">http://www.baidu.com/index.html;user?id=5#comment</a></span><span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(0, 0, 0, 1)">)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(result)</pre></p>
+</div>
+<p>结果为：</p>
+<p><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170526232824513-1155948168.png" alt=""></p>
+<p>这里就是可以对你传入的url地址进行拆分<br>同时我们是可以指定协议类型：<br>result = urlparse("<a href="http://www.baidu.com/index.html;user?id=5#comment%22,scheme=%22https%22" target="_blank" rel="noopener">www.baidu.com/index.html;user?id=5#comment",scheme="https"</a>)<br>这样拆分的时候协议类型部分就会是你指定的部分，当然如果你的url里面已经带了协议，你再通过scheme指定的协议就不会生效</p>
+<p><strong>urlunpars</strong></p>
+<p>其实功能和urlparse的功能相反，它是用于拼接，例子如下：</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib.parse <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urlunparse
+
+<p>data </span>= [<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">http</span><span style="color: rgba(128, 0, 0, 1)">‘</span>,<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>,<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">index.html</span><span style="color: rgba(128, 0, 0, 1)">‘</span>,<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">user</span><span style="color: rgba(128, 0, 0, 1)">‘</span>,<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">a=123</span><span style="color: rgba(128, 0, 0, 1)">‘</span>,<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">commit</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">]<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urlunparse(data))</pre></p>
+</div>
+<p>结果如下</p>
+<p><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170526232858950-1455483512.png" alt=""></p>
+<p><strong>urljoin</strong></p>
+<p>这个的功能其实是做拼接的，例子如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib.parse <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urljoin
+
+<p></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">FAQ.html</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://pythonsite.com/FAQ.html" target="_blank" rel="noopener">https://pythonsite.com/FAQ.html</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com/about.html" target="_blank" rel="noopener">http://www.baidu.com/about.html</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://pythonsite.com/FAQ.html" target="_blank" rel="noopener">https://pythonsite.com/FAQ.html</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com/about.html" target="_blank" rel="noopener">http://www.baidu.com/about.html</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://pythonsite.com/FAQ.html?question=2" target="_blank" rel="noopener">https://pythonsite.com/FAQ.html?question=2</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com?wd=abc" target="_blank" rel="noopener">http://www.baidu.com?wd=abc</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="https://pythonsite.com/index.php" target="_blank" rel="noopener">https://pythonsite.com/index.php</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">?category=2#comment</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">?category=2#comment</span><span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(0, 0, 0, 1)">))<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(urljoin(<span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com#comment" target="_blank" rel="noopener">www.baidu.com#comment</a></span><span style="color: rgba(128, 0, 0, 1)">‘</span>, <span style="color: rgba(128, 0, 0, 1)">‘</span><span style="color: rgba(128, 0, 0, 1)">?category=2</span><span style="color: rgba(128, 0, 0, 1)">‘</span>))</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>结果为：<br><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170526232937247-1969054893.png" alt=""></p>
+<p>从拼接的结果我们可以看出，拼接的时候后面的优先级高于前面的url</p>
+<p><strong>urlencode</strong><br>这个方法可以将字典转换为url参数，例子如下</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: rgba(0, 0, 255, 1)">from</span> urllib.parse <span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> urlencode
+
+<p>params </span>=<span style="color: rgba(0, 0, 0, 1)"> {<br>    </span><span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)">name</span><span style="color: rgba(128, 0, 0, 1)">“</span>:<span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)">zhaofan</span><span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(0, 0, 0, 1)">,<br>    </span><span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)">age</span><span style="color: rgba(128, 0, 0, 1)">“</span>:23<span style="color: rgba(0, 0, 0, 1)">,<br>}<br>base_url </span>= <span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(128, 0, 0, 1)"><a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>?</span><span style="color: rgba(128, 0, 0, 1)">“</span><span style="color: rgba(0, 0, 0, 1)"></p>
+<p>url </span>= base_url+<span style="color: rgba(0, 0, 0, 1)">urlencode(params)<br></span><span style="color: rgba(0, 0, 255, 1)">print</span>(url)</pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="//common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>结果为：</p>
+<p><img src="https://images2015.cnblogs.com/blog/997599/201705/997599-20170526233018294-1662050310.png" alt=""></p>
+<p>&nbsp;</p>
+</div>
+
+<p>本文转载自：<a href="https://www.cnblogs.com/zhaof/p/6910871.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhaof/p/6910871.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/13/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%ABUrllib%E5%BA%93%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Python小记——函数的特殊用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
