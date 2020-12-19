@@ -77,14 +77,6 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-		        
 			</div>
 		</nav>
 	</header>		
@@ -120,14 +112,6 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-			        
 				</div>
 			</nav>
 
@@ -155,6 +139,117 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-字母和数字的鲁棒输入简单测试方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/19/%E5%AD%97%E6%AF%8D%E5%92%8C%E6%95%B0%E5%AD%97%E7%9A%84%E9%B2%81%E6%A3%92%E8%BE%93%E5%85%A5%E7%AE%80%E5%8D%95%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/">字母和数字的鲁棒输入简单测试方法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/19/%E5%AD%97%E6%AF%8D%E5%92%8C%E6%95%B0%E5%AD%97%E7%9A%84%E9%B2%81%E6%A3%92%E8%BE%93%E5%85%A5%E7%AE%80%E5%8D%95%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2020-12-19T07:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="字母鲁棒输入方法"><a href="#字母鲁棒输入方法" class="headerlink" title="字母鲁棒输入方法"></a>字母鲁棒输入方法</h1><h2 id="Python-islower-方法"><a href="#Python-islower-方法" class="headerlink" title="Python islower()方法"></a>Python islower()方法</h2><p>作用：检测字符串是否由小写字母组成。</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.islower()	#如果字符串str包含至少一个区分大小写的字符，并且该字符都是小写字母，返回True，否则返回False</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; str &#x3D; &quot;abc&quot;</span><br><span class="line">&gt; str.islower()</span><br><span class="line">True</span><br><span class="line">······</span><br><span class="line">&gt; str &#x3D; &#39;abcD&#39;</span><br><span class="line">&gt; str.islower()</span><br><span class="line">False</span><br><span class="line">······</span><br><span class="line">&gt; str &#x3D; &#39;abc1&#39;</span><br><span class="line">&gt; str.islower()</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<h2 id="Python-isupper-方法"><a href="#Python-isupper-方法" class="headerlink" title="Python isupper()方法"></a>Python isupper()方法</h2><p>作用：检测字符串是否由大写字母组成。</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.upper()		#如果字符串str包含至少一个区分大小写的字符，并且该字符都是大写字母，返回True，否则返回False</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; str &#x3D; &quot;ABC&quot;</span><br><span class="line">&gt; str.isupper()</span><br><span class="line">True</span><br><span class="line">······</span><br><span class="line">&gt; str &#x3D; &#39;ABCd&#39;</span><br><span class="line">&gt; str.isupper()</span><br><span class="line">False</span><br><span class="line">······</span><br><span class="line">&gt; str &#x3D; &#39;ABC1&#39;</span><br><span class="line">&gt; str.isupper()</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<h2 id="综合使用islower-和isupper"><a href="#综合使用islower-和isupper" class="headerlink" title="综合使用islower()和isupper()"></a>综合使用islower()和isupper()</h2><h3 id="实例：英文字符的鲁棒输入"><a href="#实例：英文字符的鲁棒输入" class="headerlink" title="实例：英文字符的鲁棒输入"></a>实例：英文字符的鲁棒输入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">str &#x3D; input()</span><br><span class="line">for i in str():</span><br><span class="line">    # 判断元素i是否为大小写字母</span><br><span class="line">    if i.islower() or i.isupper():</span><br><span class="line">        print(i, end&#x3D;&quot;&quot;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="数字输出鲁棒输入方法"><a href="#数字输出鲁棒输入方法" class="headerlink" title="数字输出鲁棒输入方法"></a>数字输出鲁棒输入方法</h1><h2 id="Python-complex-方法"><a href="#Python-complex-方法" class="headerlink" title="Python complex()方法"></a>Python complex()方法</h2><p>作用：用于创建一个值为 real + imag * j 的复数或者转化一个字符串或数为复数。如果第一个参数为字符串，则不需要指定第二个参数。</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 参数说明</span><br><span class="line"># real -- int, long, float或字符串</span><br><span class="line"># imag -- int, long, float</span><br><span class="line">complex([real[, imag]])		# 返回值是一个复数</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;complex(1, 2)</span><br><span class="line">(1 + 2j)</span><br><span class="line">······</span><br><span class="line">&gt; complex(1)    # 数字</span><br><span class="line">(1 + 0j)</span><br><span class="line">······</span><br><span class="line">&gt; complex(&quot;1&quot;)  # 当做字符串处理</span><br><span class="line">(1 + 0j)</span><br><span class="line">······</span><br><span class="line"># 注意：这个地方在&quot;+&quot;号两边不能有空格，也就是不能写成&quot;1 + 2j&quot;，应该是&quot;1+2j&quot;，否则会报错</span><br><span class="line">&gt; complex(&quot;1+2j&quot;)</span><br><span class="line">(1 + 2j)</span><br></pre></td></tr></table></figure>
+<h3 id="实例：数字的鲁棒输入"><a href="#实例：数字的鲁棒输入" class="headerlink" title="实例：数字的鲁棒输入"></a>实例：数字的鲁棒输入</h3><p>获得用户输入的一个数字，可能是浮点数或复数，如果是整数仅接收十进制形式，且只能是数字。对输入数字进行平方运算，输出结果，要求：‪‬‪‬‪‬‪‬‪‬‮‬‪‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‭‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‫‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‮‬‪‬‪‬‪‬‪‬‪‬‮‬‫‬‫‬‪‬‪‬‪‬‪‬‪</p>
+<ol>
+<li>无论用户输入何种内容，程序无错误</li>
+<li>如果输入有误，请输出”输入有误”<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">number &#x3D; input()</span><br><span class="line">try:</span><br><span class="line">    # complex()和complex(eval())之间的比较将能够排除非数字类型的输入</span><br><span class="line">    # try···except···结构避免了一旦输入的数据有误跳出程序异常信息</span><br><span class="line">    if complex(number) &#x3D;&#x3D; complex(eval(number)):</span><br><span class="line">        print(eval(number) ** 2)</span><br><span class="line">except:</span><br><span class="line">    print(&quot;输入有误&quot;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">函数</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/19/%E5%AD%97%E6%AF%8D%E5%92%8C%E6%95%B0%E5%AD%97%E7%9A%84%E9%B2%81%E6%A3%92%E8%BE%93%E5%85%A5%E7%AE%80%E5%8D%95%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-关于赛博朋克的思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -963,6 +1058,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Python，物流信息技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">测试</a>
               </li>
             
             <div class="clearfix"></div>
